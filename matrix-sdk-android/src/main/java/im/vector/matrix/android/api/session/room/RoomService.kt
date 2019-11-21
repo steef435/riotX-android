@@ -18,6 +18,7 @@ package im.vector.matrix.android.api.session.room
 
 import androidx.lifecycle.LiveData
 import im.vector.matrix.android.api.MatrixCallback
+import im.vector.matrix.android.internal.session.room.alias.RoomAliasDescription
 import im.vector.matrix.android.api.session.room.model.RoomSummary
 import im.vector.matrix.android.api.session.room.model.create.CreateRoomParams
 import im.vector.matrix.android.api.util.Cancelable
@@ -58,4 +59,9 @@ interface RoomService {
      * Mark all rooms as read
      */
     fun markAllAsRead(roomIds: List<String>, callback: MatrixCallback<Unit>): Cancelable
+
+    /**
+     * Resolve a room alias to a room ID.
+     */
+    fun getRoomIdByAlias(roomAlias: String, callback: MatrixCallback<String?>): Cancelable
 }

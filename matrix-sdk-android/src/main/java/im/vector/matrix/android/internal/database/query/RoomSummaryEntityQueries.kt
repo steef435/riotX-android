@@ -31,9 +31,21 @@ internal fun RoomSummaryEntity.Companion.where(realm: Realm, roomId: String? = n
     return query
 }
 
+internal fun RoomSummaryEntity.Companion.findByAlias(realm: Realm, roomAlias: String): RoomSummaryEntity? {
+    val roomSummary = realm.where<RoomSummaryEntity>()
+            .equalTo(RoomSummaryEntityFields.CANONICAL_ALIAS, roomAlias)
+            .findFirst()
+    if (roomSummary != null) {
+        return roomSummary
+    }
+    return realm.where<RoomSummaryEntity>()
+            .`in`(RoomSummaryEntityFields.ALIASES.`$`, arrayOf(roomAlias))
+            .findFirst()
+}
+
 internal fun RoomSummaryEntity.Companion.getOrCreate(realm: Realm, roomId: String): RoomSummaryEntity {
     return where(realm, roomId).findFirst()
-           ?: realm.createObject(RoomSummaryEntity::class.java, roomId)
+            ?: realm.createObject(RoomSummaryEntity::class.java, roomId)
 }
 
 internal fun RoomSummaryEntity.Companion.getDirectRooms(realm: Realm): RealmResults<RoomSummaryEntity> {
