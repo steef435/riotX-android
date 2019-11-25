@@ -5,7 +5,8 @@ Features ✨:
  -
 
 Improvements 🙌:
- -
+ - Handle navigation to room via room alias (#201)
+ - Open matrix.to link in RiotX (#57)
 
 Other changes:
  -
