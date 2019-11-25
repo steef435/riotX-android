@@ -50,7 +50,7 @@ internal class TaskExecutor @Inject constructor(private val coroutineDispatchers
             }
             resultOrFailure
                     .onFailure {
-                        Timber.d(it, "Task failed")
+                        Timber.d(it, "Task $task failed")
                     }
                     .foldToCallback(task.callback)
         }

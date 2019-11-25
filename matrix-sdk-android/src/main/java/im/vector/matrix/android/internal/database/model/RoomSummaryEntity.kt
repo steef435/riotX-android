@@ -40,7 +40,8 @@ internal open class RoomSummaryEntity(@PrimaryKey var roomId: String = "",
                                       var tags: RealmList<RoomTagEntity> = RealmList(),
                                       var userDrafts: UserDraftsEntity? = null,
                                       var canonicalAlias: String? = null,
-                                      var aliases: RealmList<String> = RealmList()
+                                      var aliases: RealmList<String> = RealmList(),
+                                      var flatAliases: String = ""
 ) : RealmObject() {
 
     private var membershipStr: String = Membership.NONE.name
