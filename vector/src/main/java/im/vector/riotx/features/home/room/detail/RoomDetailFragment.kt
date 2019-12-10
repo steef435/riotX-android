@@ -480,14 +480,18 @@ class RoomDetailFragment @Inject constructor(
         recyclerView.adapter = timelineEventController.adapter
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0)
+                    jumpToBottomView.show()
+                else
+                    jumpToBottomView.hide()
+            }
+
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 when (newState) {
                     RecyclerView.SCROLL_STATE_IDLE     -> {
                         updateJumpToBottomViewVisibility()
-                    }
-                    RecyclerView.SCROLL_STATE_DRAGGING,
-                    RecyclerView.SCROLL_STATE_SETTLING -> {
-                        jumpToBottomView.hide()
                     }
                 }
             }
